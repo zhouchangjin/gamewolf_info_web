@@ -1,6 +1,31 @@
 <script setup>
+import {ref,computed} from 'vue'
 import LeftMenu from './view/LeftMenu.vue'
 import Banner from './view/Banner.vue'
+import Home from './view/home/Home.vue'
+import { onMounted } from 'vue'
+import axios from 'axios'
+
+const routes = {
+  '/': Home,
+}
+
+const currentPath = ref(window.location.hash)
+
+window.addEventListener('hashchange', () => {
+  currentPath.value = window.location.hash
+})
+
+const currentView = computed(() => {
+  return routes[currentPath.value.slice(1) || '/'] || NotFound
+});
+
+onMounted(() => {
+   axios.get("http://127.0.0.1:9090/route/index").then(res=>{
+    console.log(res);
+   })
+})
+
 </script>
 <template>
   <div>
@@ -13,7 +38,10 @@ import Banner from './view/Banner.vue'
         <Banner/>
       </el-header>
         
-        <el-main>Main</el-main>
+        <el-main>
+            <component :is="currentView" />
+
+        </el-main>
       </el-container>
     </el-container>
   </div>
