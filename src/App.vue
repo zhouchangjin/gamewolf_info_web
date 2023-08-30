@@ -5,7 +5,7 @@ import Banner from './view/Banner.vue'
 import Home from './view/home/Home.vue'
 import { onMounted } from 'vue'
 //import axios from 'axios'
-import request from '@/utils/request.js'
+import {ListDefaultMenu} from '@/api/ui/menu.js'
 
 const routes = {
   '/': Home,
@@ -22,7 +22,7 @@ const currentView = computed(() => {
 });
 
 onMounted(() => {
-   request.get("/example").then(res=>{
+    ListDefaultMenu().then(res=>{
     console.log(res);
    })
 })
