@@ -4,7 +4,8 @@ import LeftMenu from './view/LeftMenu.vue'
 import Banner from './view/Banner.vue'
 import Home from './view/home/Home.vue'
 import { onMounted } from 'vue'
-import axios from 'axios'
+//import axios from 'axios'
+import request from '@/utils/request.js'
 
 const routes = {
   '/': Home,
@@ -21,7 +22,7 @@ const currentView = computed(() => {
 });
 
 onMounted(() => {
-   axios.get("http://127.0.0.1:9090/route/index").then(res=>{
+   request.get("/example").then(res=>{
     console.log(res);
    })
 })
