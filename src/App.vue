@@ -20,10 +20,22 @@ window.addEventListener('hashchange', () => {
 const currentView = computed(() => {
   return routes[currentPath.value.slice(1) || '/'] || NotFound
 });
+let menudata=ref([
+    {
+        id:1,
+        menuCname:"菜单1"
+    },
+    {
+        id:2,
+        menuCname:"菜单2"
+
+    }
+]);
 
 onMounted(() => {
     ListDefaultMenu().then(res=>{
-    console.log(res);
+      console.log(res.data)
+      menudata.value=res.data.data;
    })
 })
 
@@ -32,7 +44,7 @@ onMounted(() => {
   <div>
     <el-container style="height: 100vh;">
       <el-aside  style="background-color: #023047;" width="300px">
-          <LeftMenu></LeftMenu>
+          <LeftMenu :menu="menudata"></LeftMenu>
         </el-aside>
       <el-container style="background-color: #219ebc;">
         <el-header style="background-color: #023047;" height="auto">

@@ -2,9 +2,13 @@
     import {
   Location
 } from '@element-plus/icons-vue'
+import { ref } from 'vue'
+const prop=defineProps(['menu','otherprop'])
+console.log(prop)
 </script>
 <template>
 <el-menu background-color="#335c67" text-color="#fff"  active-text-color="#ffd04b">
+    <!--
     <el-sub-menu index="1">
         <template #title>
             <el-icon><location /></el-icon>
@@ -27,6 +31,12 @@
         <el-menu-item index="3-1">第一个参数2</el-menu-item>
         <el-menu-item index="3-2">第一个参数2</el-menu-item>
     </el-sub-menu>
+    -->
+    <el-sub-menu v-for="menuitem in prop.menu" :key="menuitem.id" index="menuitem.id">
+        <template #title>
+            <span>{{ menuitem.menuCname}}</span>    
+        </template>
+        
+    </el-sub-menu>
 </el-menu>
-
 </template>
