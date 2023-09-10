@@ -1,6 +1,6 @@
 <script setup>
     import {
-  Location
+  Platform,Grid,InfoFilled,House,Comment
 } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 const prop=defineProps(['menu','otherprop'])
@@ -32,11 +32,18 @@ console.log(prop)
         <el-menu-item index="3-2">第一个参数2</el-menu-item>
     </el-sub-menu>
     -->
-    <el-sub-menu v-for="menuitem in prop.menu" :key="menuitem.id" index="menuitem.id">
+    <el-menu-item v-for="menuitem in prop.menu" :key="menuitem.id" :index="menuitem.id">
         <template #title>
+            <el-icon>
+                <platform v-if="menuitem.menuIcon=='platform'" />
+                <grid v-if="menuitem.menuIcon=='grid'" />
+                <InfoFilled v-if="menuitem.menuIcon=='info'" />
+                <House v-if="menuitem.menuIcon=='house'" />
+                <Comment v-if="menuitem.menuIcon=='comment'" />
+            </el-icon>
             <span>{{ menuitem.menuCname}}</span>    
         </template>
         
-    </el-sub-menu>
+    </el-menu-item>
 </el-menu>
 </template>
